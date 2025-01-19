@@ -1,8 +1,8 @@
 import { Stack } from "expo-router";
 import { tokenCache } from "./../cache";
 import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
-import { UserDetailsContext } from "./../context/UserDetailsContext";
 import { useState } from "react";
+import { UserDetailContext } from "../context/UserDetailContext";
 
 export default function RootLayout() {
     const [userDetail, setUserDetail] = useState();
@@ -18,9 +18,8 @@ export default function RootLayout() {
     return (
         <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
             <ClerkLoaded>
-                <UserDetailsContext.Provider
-                    value={{ userDetail, setUserDetail }}
-                >
+                <UserDetailContext.Provider
+                    value={{ userDetail, setUserDetail }}>
                     <Stack screenOptions={{ headerShown: false }}>
                         <Stack.Screen name="(tabs)" />
                         <Stack.Screen
@@ -28,7 +27,7 @@ export default function RootLayout() {
                             options={{ headerShown: false }}
                         />
                     </Stack>
-                </UserDetailsContext.Provider>
+                </UserDetailContext.Provider>
             </ClerkLoaded>
         </ClerkProvider>
     );
